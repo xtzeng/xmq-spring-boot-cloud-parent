@@ -1,0 +1,17 @@
+package com.xmq.service.inf;
+
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.xmq.service.impl.XmqClientHystrix;
+
+@FeignClient(value = "xmq-service", fallback = XmqClientHystrix.class)
+public interface IXmqClient {
+
+    @RequestMapping(method = RequestMethod.GET, value = "/add")
+    Integer add(@RequestParam(value = "a") Integer a, @RequestParam(value = "b") Integer b);
+
+}
+
